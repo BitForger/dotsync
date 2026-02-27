@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  configsync
+//  dotsync
 //
 //  Created by Noah on 2/27/26.
 //
@@ -94,7 +94,7 @@ struct SettingsView: View {
                         }
                     }
                     
-                    Text("When enabled, ConfigSync will run in the background and sync your files automatically when you log in.")
+                    Text("When enabled, DotSync will run in the background and sync your files automatically when you log in.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)

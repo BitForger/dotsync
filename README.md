@@ -36,7 +36,7 @@ You can add or remove files in **Settings**.
 DotSync stores your files in a dedicated folder inside iCloud Drive:
 
 ```
-~/Library/Mobile Documents/com~apple~CloudDocs/ConfigSync/
+~/Library/Mobile Documents/com~apple~CloudDocs/DotSync/
 ```
 
 When a sync runs, each configured file is compared between your local machine and iCloud:
@@ -87,7 +87,7 @@ This project is built with **Swift** and **SwiftUI** using Xcode.
    ```sh
    git clone https://github.com/BitForger/config-sync.git
    ```
-2. Open `configsync.xcodeproj` in Xcode (the project file retains the original internal name)
+2. Open `dotsync.xcodeproj` in Xcode
 3. Select your target Mac and press **⌘R** to build and run
 
 ## License
