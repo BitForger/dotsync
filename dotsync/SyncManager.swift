@@ -1,6 +1,6 @@
 //
 //  SyncManager.swift
-//  configsync
+//  dotsync
 //
 //  Created by Noah on 2/27/26.
 //
@@ -21,7 +21,7 @@ actor SyncManager {
         let home = fileManager.homeDirectoryForCurrentUser
         let iCloudDrive = home
             .appendingPathComponent("Library/Mobile Documents/com~apple~CloudDocs")
-            .appendingPathComponent("ConfigSync")
+            .appendingPathComponent("DotSync")
         
         self.iCloudContainerURL = iCloudDrive
         
@@ -145,7 +145,7 @@ actor SyncManager {
     
     private func postNotification(body: String) async {
         let content = UNMutableNotificationContent()
-        content.title = "ConfigSync"
+        content.title = "DotSync"
         content.body = body
         content.sound = .default
         

@@ -1,6 +1,6 @@
 //
-//  configsyncApp.swift
-//  configsync
+//  dotsyncApp.swift
+//  dotsync
 //
 //  Created by Noah on 2/27/26.
 //
@@ -10,7 +10,7 @@ import AppKit
 import UserNotifications
 
 @main
-struct ConfigSyncApp: App {
+struct DotSyncApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "arrow.triangle.2.circlepath.circle", accessibilityDescription: "ConfigSync")
+            button.image = NSImage(systemSymbolName: "arrow.triangle.2.circlepath.circle", accessibilityDescription: "DotSync")
         }
         
         let menu = NSMenu()
@@ -73,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func syncNow() {
         Task {
             await syncManager.sync()
-            showNotification(title: "ConfigSync", body: "Sync completed")
+            showNotification(title: "DotSync", body: "Sync completed")
         }
     }
     
@@ -88,7 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 backing: .buffered,
                 defer: false
             )
-            window.title = "ConfigSync Settings"
+            window.title = "DotSync Settings"
             window.contentView = NSHostingView(rootView: settingsView)
             window.center()
             window.isReleasedWhenClosed = false
@@ -113,7 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func installLaunchAgent() {
         LaunchAgentManager.install()
-        showNotification(title: "ConfigSync", body: "Launch Agent installed. App will start on login.")
+        showNotification(title: "DotSync", body: "Launch Agent installed. App will start on login.")
     }
     
     @objc func quit() {

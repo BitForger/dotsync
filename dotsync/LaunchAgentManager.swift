@@ -1,6 +1,6 @@
 //
 //  LaunchAgentManager.swift
-//  configsync
+//  dotsync
 //
 //  Created by Noah on 2/27/26.
 //
@@ -8,7 +8,7 @@
 import Foundation
 
 struct LaunchAgentManager {
-    static let plistName = "com.configsync.agent.plist"
+    static let plistName = "com.dotsync.agent.plist"
     
     static var launchAgentsURL: URL {
         FileManager.default.homeDirectoryForCurrentUser
@@ -27,12 +27,12 @@ struct LaunchAgentManager {
         let appPath = Bundle.main.bundlePath
         
         let plistContent: [String: Any] = [
-            "Label": "com.configsync.agent",
-            "ProgramArguments": ["\(appPath)/Contents/MacOS/ConfigSync"],
+            "Label": "com.dotsync.agent",
+            "ProgramArguments": ["\(appPath)/Contents/MacOS/DotSync"],
             "RunAtLoad": true,
             "KeepAlive": false,
-            "StandardOutPath": "/tmp/configsync.log",
-            "StandardErrorPath": "/tmp/configsync.error.log"
+            "StandardOutPath": "/tmp/dotsync.log",
+            "StandardErrorPath": "/tmp/dotsync.error.log"
         ]
         
         try? FileManager.default.createDirectory(at: launchAgentsURL, withIntermediateDirectories: true)

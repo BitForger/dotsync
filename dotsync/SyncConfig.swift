@@ -1,6 +1,6 @@
 //
 //  SyncConfig.swift
-//  configsync
+//  dotsync
 //
 //  Created by Noah on 2/27/26.
 //
@@ -22,7 +22,7 @@ struct SyncConfig: Codable {
     
     static var configURL: URL {
         let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let appFolder = appSupport.appendingPathComponent("ConfigSync")
+        let appFolder = appSupport.appendingPathComponent("DotSync")
         try? FileManager.default.createDirectory(at: appFolder, withIntermediateDirectories: true)
         return appFolder.appendingPathComponent("config.json")
     }
