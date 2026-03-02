@@ -117,10 +117,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    @objc func installLaunchAgent() {
-        LaunchAgentManager.install()
-        showNotification(title: "DotSync", body: "Launch Agent installed. App will start on login.")
-    }
     
     @objc func quit() {
         NSApplication.shared.terminate(nil)

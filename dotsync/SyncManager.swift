@@ -31,6 +31,7 @@ actor SyncManager {
     }
     
     func sync() async {
+        self.config = SyncConfig.load()
         guard let cloudURL = iCloudContainerURL else {
             print("iCloud not available")
             return

@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @State private var filesToSync: [String] = SyncConfig.load().filesToSync
     @State private var newFile: String = ""
-    @State private var launchAgentEnabled: Bool = LaunchAgentManager.isInstalled
+    @State private var launchAgentEnabled: Bool = LaunchAgentManager.isEnabled
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -79,9 +79,9 @@ struct SettingsView: View {
                             .toggleStyle(.switch)
                             .onChange(of: launchAgentEnabled) { _, newValue in
                                 if newValue {
-                                    LaunchAgentManager.install()
+                                    LaunchAgentManager.enable()
                                 } else {
-                                    LaunchAgentManager.uninstall()
+                                    LaunchAgentManager.disable()
                                 }
                             }
                         

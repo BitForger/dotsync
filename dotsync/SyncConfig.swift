@@ -21,6 +21,20 @@ struct SyncConfig: Sendable {
     ]
     
     nonisolated static var configURL: URL {
+        let home = FileManager.default.homeDirectoryForCurrentUser
+        let iCloudFolder = home
+            .appendingPathComponent("Library/Mobile Documents/com~apple~CloudDocs")
+            .appendingPathComponent("DotSync")
+        
+        // Create folder if needed
+        if !FileManager.default.fileExists(atPath: iCloudFolder.path) {
+            try? FileManager.default.createDirectory(at: iCloudFolder, withIntermediateDirectories: true)
+        }
+        
+        return iCloudFolder.appendingPathComponent("config.json")
+    }
+    
+    nonisolated static var localConfigURL: URL {
         let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let appFolder = appSupport.appendingPathComponent("DotSync")
         try? FileManager.default.createDirectory(at: appFolder, withIntermediateDirectories: true)
@@ -32,6 +46,15 @@ struct SyncConfig: Sendable {
            let config = try? JSONDecoder().decode(SyncConfig.self, from: data) {
             return config
         }
+        
+        if let data = try? Data(contentsOf: localConfigURL),
+           let config = try? JSONDecoder().decode(SyncConfig.self, from: data) {
+            // Migrate local config to iCloud
+            config.save()
+            return config
+        }
+        
+        // Create default config
         let defaultConfig = SyncConfig(filesToSync: self.defaultFiles, syncIntervalMinutes: 5)
         defaultConfig.save()
         return defaultConfig
