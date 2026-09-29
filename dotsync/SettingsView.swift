@@ -77,7 +77,7 @@ struct SettingsView: View {
                     HStack {
                         Toggle("Start at Login", isOn: $launchAgentEnabled)
                             .toggleStyle(.switch)
-                            .onChange(of: launchAgentEnabled) { _, newValue in
+                            .onChange(of: launchAgentEnabled) { newValue in
                                 if newValue {
                                     LaunchAgentManager.enable()
                                 } else {

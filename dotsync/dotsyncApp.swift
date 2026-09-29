@@ -28,6 +28,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var windowCloseHandler: WindowCloseHandler?
     
     func applicationDidFinishLaunching(_ notification: Notification) {
+        if shouldTerminateBecauseAnotherInstanceIsRunning() {
+            NSApp.terminate(nil)
+            return
+        }
+
         // Request notification authorization
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if let error = error {
@@ -134,6 +139,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 print("Error showing notification: \(error.localizedDescription)")
             }
         }
+    }
+
+    private func shouldTerminateBecauseAnotherInstanceIsRunning() -> Bool {
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
+            return false
+        }
+
+        let currentPID = ProcessInfo.processInfo.processIdentifier
+        let runningInstances = NSRunningApplication
+            .runningApplications(withBundleIdentifier: bundleIdentifier)
+            .filter { $0.processIdentifier != currentPID }
+
+        return !runningInstances.isEmpty
     }
 }
 
